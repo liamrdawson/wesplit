@@ -17,15 +17,25 @@ struct ContentView: View {
     let tipPercentages = [10, 15, 20, 25, 0]
     
     var body: some View {
-        Form {
-            Section {
-                // We can set the keyboardType to decimalPad to save users from having to switch to their numberic keypad. We're using decimalPad as we know that users will probably need to enter decimal values to enter an amount of currency.
-                TextField("Amount", text: $checkAmount)
-                    .keyboardType(.decimalPad)
+        NavigationView {
+            Form {
+                Section {
+                    TextField("Amount", text: $checkAmount)
+                        .keyboardType(.decimalPad)
+                    
+                    // Here's an example of the declarative nature of SwiftUI - we're talling swiftUI that we want a picker, and because we're placing it in a Form, it's automatically rendering it in a multi screen layout and not a wheel.
+                    Picker("Number of people", selection: $numberOfPeople) {
+                        ForEach(2 ..< 100) {
+                            Text("\($0) people")
+                        }
+                    }
+                }
+                Section {
+                    Text("£\(checkAmount)")
+                }
             }
-            Section {
-                Text("£\(checkAmount)")
-            }
+                // We need to attach this modifier to the end of the form, as NavigationView can show multiple forms while the program runs.
+            .navigationBarTitle("WeSplit")
         }
     }
 }
