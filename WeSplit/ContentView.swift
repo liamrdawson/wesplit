@@ -15,9 +15,11 @@ struct ContentView: View {
     
     var body: some View {
         Form {
-            // By adding a $ before name, we're creating a two way binding, this means that the text field reads the empty string in state and state reads and is updated by the value input to the TextField.
-            TextField("Enter your name:", text: $name)
-            Text("Your name is: \(name)")
+            // We can use ForEach loops to iterate the same code a set number of times.
+            // Because ForEach passes in a closure, we can use short hand syntax with string interpolation to complete the loop.
+            ForEach (0 ..< 100) {
+                    Text("The number is \($0)")
+            }
         }
     }
 }
